@@ -1,2 +1,4 @@
-include ':app'
+include ':app', ':Ejercicio1.1', ':Ejercicio1.2'
 rootProject.name='U4T6Contacts'
+project(':Ejercicio1.1').projectDir = new File('app Ejercicio1.1')
+project(':Ejercicio1.2').projectDir = new File('app Ejercicio1.2')
