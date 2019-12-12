@@ -1,27 +1,29 @@
 package dam.androidjavierjuanuceda.u4t6contacts;
 
+import android.graphics.Bitmap;
+
 public class ContactItem {
-    private int id_imagen;
+    private Bitmap id_imagen;
     private String phone;
     private String name;
     private int id;
 
-    public ContactItem(int id_imagen, String phone, String name, int id) {
-        this.id_imagen = id_imagen;
+    public ContactItem(Bitmap imagen, String phone, String name, int id) {
+        this.id_imagen = imagen;
         this.phone = phone;
         this.name = name;
         this.id = id;
     }
 
     public ContactItem(String phone, String name, int id) {
-        this.id_imagen = 0;
+        this.id_imagen = null;
         this.phone = phone;
         this.name = name;
         this.id = id;
     }
 
     public ContactItem() {
-        this.id_imagen = 0;
+        this.id_imagen = null;
         this.phone = "";
         this.name = "";
         this.id = 0;
@@ -34,11 +36,11 @@ public class ContactItem {
         this.id = contactItem.getId();
     }
 
-    public int getId_imagen() {
+    public Bitmap getId_imagen() {
         return id_imagen;
     }
 
-    public void setId_imagen(int id_imagen) {
+    public void setId_imagen(Bitmap id_imagen) {
         this.id_imagen = id_imagen;
     }
 
@@ -61,7 +63,9 @@ public class ContactItem {
     public int getId() {
         return id;
     }
-
+    public String getImagen() {
+        return id_imagen+"";
+    }
     public void setId(int id) {
         this.id = id;
     }
