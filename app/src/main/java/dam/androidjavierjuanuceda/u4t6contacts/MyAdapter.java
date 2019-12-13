@@ -18,7 +18,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         this.myContacts=myContacts;
     }
 
-
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
 
