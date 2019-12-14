@@ -14,11 +14,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private MyContacts myContacts;
     private OnItemClickListener click_listener;
-    private OnItemLongClickListener long_listener;
-    public MyAdapter (MyContacts myContacts , OnItemClickListener listener , OnItemLongClickListener long_listener) {
+
+    public MyAdapter (MyContacts myContacts , OnItemClickListener listener) {
         this.myContacts=myContacts;
         this.click_listener=listener;
-        this.long_listener=long_listener;
     }
 
     public interface OnItemClickListener {
@@ -48,30 +47,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         }
 
-        public void bind (ContactItem contactItem , OnItemClickListener listener , OnItemLongClickListener long_listener){
+        public void bind (ContactItem contactItem , OnItemClickListener listener){
             this.textView_nombre.setText(contactItem.getName());
             this.textView_id.setText(String.valueOf(contactItem.getId()));
             this.textView_telefono.setText(contactItem.getPhone());
             this.imagen_contacto.setImageBitmap(contactItem.getId_imagen());
-
-            this.imagen_contacto.setOnLongClickListener(v-> long_listener.OnItemLongClickListener(contactItem));
-            this.textView_telefono.setOnLongClickListener(v-> long_listener.OnItemLongClickListener(contactItem));
-            this.textView_id.setOnLongClickListener(v-> long_listener.OnItemLongClickListener(contactItem));
-            this.textView_nombre.setOnLongClickListener(v-> long_listener.OnItemLongClickListener(contactItem));
-            this.itemView.setOnLongClickListener(v-> long_listener.OnItemLongClickListener(contactItem));
-
-
-
 
             this.imagen_contacto.setOnClickListener(v-> listener.OnItemClick(contactItem));
             this.textView_telefono.setOnClickListener(v-> listener.OnItemClick(contactItem));
             this.textView_id.setOnClickListener(v-> listener.OnItemClick(contactItem));
             this.textView_nombre.setOnClickListener(v-> listener.OnItemClick(contactItem));
             this.itemView.setOnClickListener(v-> listener.OnItemClick(contactItem));
-
         }
-
-
     }
 
     @NonNull
@@ -87,7 +74,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int position) {
         Log.i("Contacto",myContacts.getContactData(position).toString());
-        viewHolder.bind(myContacts.getContactData(position),click_listener,long_listener);
+        viewHolder.bind(myContacts.getContactData(position),click_listener);
     }
 
     @Override

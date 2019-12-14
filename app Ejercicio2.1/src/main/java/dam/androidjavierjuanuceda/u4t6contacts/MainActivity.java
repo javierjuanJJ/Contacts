@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,14 +22,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemClickListener , MyAdapter.OnItemLongClickListener {
+public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemClickListener {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
     TextView emptyList;
     MyContacts myContacts;
+    TextView tvDisplayContact;
     RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    static final int PICK_CONTACT_REQUEST = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +47,18 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+        tvDisplayContact = findViewById(R.id.tvdisplayContact);
         setListAdapter();
 
     }
 
-
-
     private void setListAdapter() {
         myContacts= new MyContacts(this);
-        mAdapter = new MyAdapter(myContacts, this::OnItemClick, this::OnItemLongClickListener);
+        mAdapter = new MyAdapter(myContacts, this::OnItemClick);
         recyclerView.setAdapter(mAdapter);
-        
         if (myContacts.getCount() > 0) findViewById(R.id.tvEmptyList).setVisibility(View.INVISIBLE);
-
     }
-
-
 
     private boolean checkPermissions() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     setUI();
                 } else
@@ -89,20 +87,12 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
 
     @Override
     public void OnItemClick(ContactItem Contact) {
-        Log.i("Apretado","Apretado corto " + Contact);
+        tvDisplayContact.setVisibility(View.VISIBLE);
+        tvDisplayContact.setText(Contact.toString());
     }
 
-
     @Override
-    public boolean OnItemLongClickListener(ContactItem contactItem) {
-        Log.i("Apretado","Apretado largo");
-
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, String.valueOf(contactItem.getId()));
-        intent.setData(uri);
-        startActivity(intent);
-
-        return false;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setUI();
     }
 }
