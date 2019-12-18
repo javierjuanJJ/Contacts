@@ -1,7 +1,9 @@
-include ':app', ':Ejercicio1.1', ':Ejercicio1.2', ':Ejercicio2.1', ':Ejercicio2.2', ':Ejercicio1.3'
+include ':app', ':Ejercicio1.1', ':Ejercicio1.2', ':Ejercicio2.1', ':app_activ2', ':app_activ1', ':app activ1', ':app activ2'
 rootProject.name='U4T6Contacts'
 project(':Ejercicio1.1').projectDir = new File('app Ejercicio1.1')
 project(':Ejercicio1.2').projectDir = new File('app Ejercicio1.2')
 project(':Ejercicio2.1').projectDir = new File('app Ejercicio2.1')
-project(':Ejercicio2.2').projectDir = new File('app Ejercicio2.2')
-project(':Ejercicio1.3').projectDir = new File('app Ejercicio1.3')
+project(':app_activ2').projectDir = new File('app Ejercicio2.2')
+project(':app_activ1').projectDir = new File('app Ejercicio1.3')
+project(':app activ1').projectDir = new File('app_activ1')
+project(':app activ2').projectDir = new File('app_activ2')

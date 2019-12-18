@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class MyContacts {
 
+    //TODO Activity1: Atributos de myContacts
+
     private ArrayList<ContactItem> myDataSet;
     private Context context;
 
@@ -31,7 +33,7 @@ public class MyContacts {
 
     private Bitmap retrieveContactPhoto(String contactID) {
 
-        Bitmap photo = null;
+        Bitmap photo;
         InputStream inputStream = null;
         try {
             ContentResolver contentResolver = context.getContentResolver();
@@ -40,8 +42,8 @@ public class MyContacts {
             photo = BitmapFactory.decodeStream(inputStream);
         } finally {
             try {
-            assert inputStream != null;
-            inputStream.close();
+                assert inputStream != null;
+                inputStream.close();
             } catch (Exception e) {
             }
         }
@@ -51,6 +53,7 @@ public class MyContacts {
     }
 
     private ArrayList<ContactItem> getContacts() {
+        //TODO Activity1: Coger todos los contactos
         ArrayList<ContactItem> contactsList = new ArrayList();
 
         ContentResolver contentResolver = context.getContentResolver();
@@ -59,10 +62,10 @@ public class MyContacts {
         String[] projection = new String[]{
                 ContactsContract.Data._ID,
                 ContactsContract.Data.DISPLAY_NAME,
-                ContactsContract.CommonDataKinds.Phone.NUMBER ,
-                ContactsContract.Data.CONTACT_ID ,
+                ContactsContract.CommonDataKinds.Phone.NUMBER,
+                ContactsContract.Data.CONTACT_ID,
                 ContactsContract.Data.LOOKUP_KEY,
-                ContactsContract.Data.RAW_CONTACT_ID ,
+                ContactsContract.Data.RAW_CONTACT_ID,
                 ContactsContract.Contacts.PHOTO_URI,
                 ContactsContract.Data.PHOTO_THUMBNAIL_URI,
                 ContactsContract.CommonDataKinds.Phone.TYPE
@@ -94,16 +97,15 @@ public class MyContacts {
 
                 String PHOTO_THUMBNAIL_URIIndex_number = contactsCursor.getString(PHOTO_THUMBNAIL_URIIndex);
                 String TYPEIndex_number = contactsCursor.getString(TYPEIndex);
-                Bitmap bitmap =retrieveContactPhoto(CONTACT_IDIndex_number);
+                Bitmap bitmap = retrieveContactPhoto(CONTACT_IDIndex_number);
                 String URI = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI));
 
 
                 ContactItem contactItem = new ContactItem(bitmap, number, name, CONTACT_IDIndex);
 
-                try{
-                    Log.i("imagen",URI);
-                }
-                catch (NullPointerException e) {
+                try {
+                    Log.i("imagen", URI);
+                } catch (NullPointerException e) {
                     contactItem.setId_imagen(BitmapFactory.decodeResource(context.getResources(), R.drawable.contacto_por_defecto));
                 }
 
@@ -118,10 +120,12 @@ public class MyContacts {
     }
 
     public ContactItem getContactData(int position) {
+        //TODO Activity1: Recuperar el dato del contacto
         return myDataSet.get(position);
     }
 
     public int getCount() {
+        //TODO Activity1: Coger el numero de contactos,
         return myDataSet.size();
     }
 

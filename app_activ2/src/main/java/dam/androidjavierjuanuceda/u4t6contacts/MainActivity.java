@@ -85,16 +85,22 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
         }
     }
 
+    //TODO Activity2: Cuando se hace click en un contacto
+
     @Override
     public void OnItemClick(ContactItem Contact) {
         tvDisplayContact.setVisibility(View.VISIBLE);
         tvDisplayContact.setText(Contact.toString());
     }
 
+    //TODO Activity2: Despues de editar el contacto
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         setUI();
     }
+
+    //TODO Activity2: Cuando se hace click largo en un contacto
 
     @Override
     public boolean OnItemLongClickListener(ContactItem contactItem) {

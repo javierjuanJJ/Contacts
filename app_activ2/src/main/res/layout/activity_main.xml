@@ -26,6 +26,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!--TODO Activity2: TextView de la informacion del contacto al hacer un click corto-->
+
     <TextView
         android:id="@+id/tvdisplayContact"
         android:layout_width="0dp"

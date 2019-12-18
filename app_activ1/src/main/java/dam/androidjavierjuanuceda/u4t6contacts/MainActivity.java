@@ -32,11 +32,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        emptyList=findViewById(R.id.tvEmptyList);
+        emptyList = findViewById(R.id.tvEmptyList);
         if (!checkPermissions()) emptyList.setText(getString(R.string.no_contacts_available));
     }
 
     private void setUI() {
+
+        //TODO Activity1: Poner el recyclerview y el item de decoracion.
 
         recyclerView = findViewById(R.id.recyclerViewContacts);
         recyclerView.setHasFixedSize(true);
@@ -48,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setListAdapter() {
-        myContacts= new MyContacts(this);
+
+        //TODO Activity1: Poner el adapter y los contactos.
+
+        myContacts = new MyContacts(this);
         recyclerView.setAdapter(new MyAdapter(myContacts));
         mAdapter = new MyAdapter(myContacts);
         recyclerView.setAdapter(mAdapter);
@@ -60,10 +65,9 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         boolean are_contacts_available;
         try {
-            are_contacts_available=(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED);
-        }
-        catch (Exception e){
-            are_contacts_available=false;
+            are_contacts_available = (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED);
+        } catch (Exception e) {
+            are_contacts_available = false;
         }
         return are_contacts_available;
 
